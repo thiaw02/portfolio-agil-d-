@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>AGIL/D - Cabinet de Consultance</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<style>
+		* {
+			font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		}
+
+		html {
+			scroll-behavior: smooth;
+		}
+
+		/* ANIMATIONS PREMIUM */
+		@keyframes fadeInUp {
+			from {
+				opacity: 0;
+				transform: translateY(30px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		@keyframes fadeInDown {
+			from {
+				opacity: 0;
+				transform: translateY(-20px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+			}
+			to {
+				opacity: 1;
+			}
+		}
+
+		@keyframes slideInLeft {
+			from {
+				opacity: 0;
+				transform: translateX(-40px);
+			}
+			to {
+				opacity: 1;
+				transform: translateX(0);
+			}
+		}
+
+		@keyframes slideInRight {
+			from {
+				opacity: 0;
+				transform: translateX(40px);
+			}
+			to {
+				opacity: 1;
+				transform: translateX(0);
+			}
+		}
+
+		@keyframes scaleIn {
+			from {
+				opacity: 0;
+				transform: scale(0.95);
+			}
+			to {
+				opacity: 1;
+				transform: scale(1);
+			}
+		}
+
+		@keyframes float {
+			0%, 100% {
+				transform: translateY(0px);
+			}
+			50% {
+				transform: translateY(-10px);
+			}
+		}
+
+		/* Classes d'animation */
+		.animate-fade-in-up {
+			animation: fadeInUp 0.8s ease-out forwards;
+		}
+
+		.animate-fade-in-down {
+			animation: fadeInDown 0.8s ease-out forwards;
+		}
+
+		.animate-fade-in {
+			animation: fadeIn 1s ease-out forwards;
+		}
+
+		.animate-slide-in-left {
+			animation: slideInLeft 0.8s ease-out forwards;
+		}
+
+		.animate-slide-in-right {
+			animation: slideInRight 0.8s ease-out forwards;
+		}
+
+		.animate-scale-in {
+			animation: scaleIn 0.8s ease-out forwards;
+		}
+
+		.animate-float {
+			animation: float 3s ease-in-out infinite;
+		}
+
+		/* Stagger animations */
+		.animate-stagger-1 {
+			animation-delay: 0.1s;
+		}
+		.animate-stagger-2 {
+			animation-delay: 0.2s;
+		}
+		.animate-stagger-3 {
+			animation-delay: 0.3s;
+		}
+		.animate-stagger-4 {
+			animation-delay: 0.4s;
+		}
+		.animate-stagger-5 {
+			animation-delay: 0.5s;
+		}
+		.animate-stagger-6 {
+			animation-delay: 0.6s;
+		}
+
+		/* NAVBAR */
+		.nav-link {
+			position: relative;
+			transition: all 0.3s ease;
+			font-weight: 500;
+			letter-spacing: 0.3px;
+		}
+		
+		.nav-link::after {
+			content: '';
+			position: absolute;
+			bottom: -4px;
+			left: 0;
+			width: 0;
+			height: 2.5px;
+			background: linear-gradient(90deg, #2563eb, #3b82f6);
+			transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+			border-radius: 2px;
+		}
+		
+		.nav-link:hover::after {
+			width: 100%;
+		}
+
+		/* CARTES SERVICES */
+		.service-card {
+			transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+			background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+			border: 1px solid #e2e8f0;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.service-card::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: -100%;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+			transition: left 0.6s ease;
+		}
+
+		.service-card:hover::before {
+			left: 100%;
+		}
+		
+		.service-card:hover {
+			transform: translateY(-8px);
+			box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.15);
+			border-color: #3b82f6;
+		}
+
+		/* CARTES PROJETS */
+		.project-card {
+			transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+			overflow: hidden;
+			border-radius: 1rem;
+			border: 1px solid #e2e8f0;
+			background: white;
+		}
+		
+		.project-card:hover {
+			transform: translateY(-12px) scale(1.02);
+			box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.15);
+			border-color: #3b82f6;
+		}
+
+		.project-card:hover .project-image {
+			transform: scale(1.1);
+		}
+
+		.project-image {
+			transition: transform 0.6s ease;
+			overflow: hidden;
+		}
+
+		/* BOUTONS */
+		.btn-primary {
+			transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+			background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+			position: relative;
+			overflow: hidden;
+			font-weight: 600;
+			letter-spacing: 0.3px;
+		}
+
+		.btn-primary::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: -100%;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+			transition: left 0.6s ease;
+		}
+
+		.btn-primary:hover {
+			background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+			transform: translateY(-3px);
+			box-shadow: 0 15px 30px -7px rgba(37, 99, 235, 0.5);
+		}
+
+		.btn-primary:hover::before {
+			left: 100%;
+		}
+
+		/* TÉMOIGNAGES */
+		.testimonial-card {
+			transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+			background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+			border: 1px solid #e2e8f0;
+			border-left: 4px solid #2563eb;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.testimonial-card::before {
+			content: '"';
+			position: absolute;
+			top: -30px;
+			right: 20px;
+			font-size: 120px;
+			color: #f0f4f8;
+			font-family: Georgia, serif;
+			line-height: 1;
+		}
+		
+		.testimonial-card:hover {
+			transform: translateY(-8px);
+			box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.1);
+		}
+
+		/* ICÔNES */
+		.icon {
+			width: 48px;
+			height: 48px;
+			transition: transform 0.3s ease;
+		}
+
+		.service-card:hover .icon {
+			transform: scale(1.1) rotate(5deg);
+		}
+
+		/* TITLES PREMIUM */
+		h1, h2, h3 {
+			font-weight: 700;
+			letter-spacing: -0.5px;
+		}
+
+		h1 {
+			font-size: 3.5rem;
+			line-height: 1.1;
+		}
+
+		h2 {
+			font-size: 2.25rem;
+			line-height: 1.2;
+			margin-bottom: 1rem;
+		}
+
+		h3 {
+			font-size: 1.375rem;
+			line-height: 1.25;
+		}
+
+		/* PARAGRAPHE PREMIUM */
+		p {
+			line-height: 1.75;
+			letter-spacing: 0.2px;
+			color: #3f4651;
+		}
+
+		/* SECTION SPACING */
+		section {
+			scroll-behavior: smooth;
+		}
+
+		/* GRADIENT ACCENT */
+		.accent-gradient {
+			background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			background-clip: text;
+		}
+
+		/* SEPARATOR LINES */
+		.separator {
+			height: 3px;
+			width: 48px;
+			background: linear-gradient(90deg, #2563eb, #3b82f6);
+			border-radius: 2px;
+		}
+
+		/* SMOOTH TRANSITIONS GLOBALES */
+		button, a {
+			transition: all 0.3s ease;
+		}
+
+		/* FOCUS STATES */
+		input:focus, textarea:focus {
+			outline: none;
+			border-color: #2563eb !important;
+			background-color: #f8fafc;
+			box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+		}
+
+		/* MOBILE MENU ANIMATION */
+		#mobile-menu {
+			transition: all 0.3s ease;
+		}
+
+		/* EFFETS 3D HERO */
+		.perspective-container {
+			perspective: 1200px;
+		}
+
+		.hero-card-3d {
+			transform-style: preserve-3d;
+			transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+		}
+
+		.hero-card-3d:hover {
+			transform: rotateY(-10deg) rotateX(5deg) translateZ(30px);
+			box-shadow: 
+				-20px 20px 60px rgba(0, 0, 0, 0.3),
+				30px -20px 80px rgba(37, 99, 235, 0.2),
+				inset 0 1px 0 rgba(255, 255, 255, 0.1);
+		}
+
+		/* Effet de profondeur */
+		.hero-card-3d::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%, rgba(0,0,0,0.2) 100%);
+			pointer-events: none;
+			z-index: 20;
+			opacity: 0;
+			transition: opacity 0.6s ease;
+		}
+
+		.hero-card-3d:hover::before {
+			opacity: 1;
+		}
+
+		/* Effets de lueur */
+		.hero-card-3d::after {
+			content: '';
+			position: absolute;
+			inset: 0;
+			background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 60%);
+			opacity: 0;
+			transition: opacity 0.6s ease;
+			z-index: 10;
+		}
+
+		.hero-card-3d:hover::after {
+			opacity: 1;
+		}
+
+		/* Animation de groupe pour les enfants */
+		.hero-card-3d:hover > div:first-child {
+			transform: translateZ(20px);
+		}
+
+		/* Avatar 3D effect */
+		.avatar-3d {
+			transform: translateZ(0);
+			transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.6s ease;
+			will-change: transform;
+		}
+
+		.hero-card-3d .avatar-3d img {
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		.hero-card-3d:hover .avatar-3d {
+			transform: translateZ(48px) scale(1.06);
+			box-shadow: 0 30px 60px rgba(0,0,0,0.28);
+		}
+
+		/* GRADIENT HERO */
+		.hero-gradient {
+			background: linear-gradient(135deg, #2563eb 0%, #1e40af 50%, #1e3a8a 100%);
+		}
+
+		/* FOOTER GRADIENT */
+		.footer-gradient {
+			background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+		}
+
+		/* CARDS SHADOW */
+		.card-shadow {
+			box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.08);
+		}
+
+		/* SUBTLE BORDERS */
+		.border-subtle {
+			border-color: #e5e7eb;
+		}
+
+		/* HOVER TEXT COLOR */
+		.hover-blue:hover {
+			color: #2563eb;
+		}
+
+		/* SMOOTH SCROLL SENTINEL */
+		.scroll-sentinel {
+			opacity: 0;
+		}
+
+		/* GALERIE MÉDIA */
+		.project-media-container {
+			transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		}
+
+		.project-media-container:hover {
+			transform: translateY(-4px);
+		}
+
+		/* Miniatures */
+		.thumbnail {
+			transition: all 0.3s ease;
+			cursor: pointer;
+			position: relative;
+		}
+
+		.thumbnail:hover {
+			transform: scale(1.05);
+			box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+			z-index: 10;
+		}
+
+		/* Overlay vidéo */
+		.video-overlay {
+			position: absolute;
+			inset: 0;
+			background: rgba(0, 0, 0, 0.4);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: all 0.3s ease;
+		}
+
+		.thumbnail:hover .video-overlay {
+			background: rgba(0, 0, 0, 0.6);
+		}
+
+		/* Animation de pulsation pour les vidéos */
+		@keyframes pulse {
+			0%, 100% {
+				transform: scale(1);
+			}
+			50% {
+				transform: scale(1.1);
+			}
+		}
+
+		.video-icon {
+			animation: pulse 2s infinite;
+		}
+
+		/* Mode plein écran pour galerie */
+		.media-modal {
+			position: fixed;
+			inset: 0;
+			background: rgba(0, 0, 0, 0.95);
+			z-index: 9999;
+			display: none;
+			align-items: center;
+			justify-content: center;
+			padding: 2rem;
+		}
+
+		.media-modal.active {
+			display: flex;
+		}
+
+		.modal-content {
+			max-width: 90%;
+			max-height: 90%;
+			position: relative;
+		}
+
+		.modal-content img,
+		.modal-content video {
+			width: 100%;
+			height: auto;
+			max-height: 80vh;
+			object-fit: contain;
+			border-radius: 0.5rem;
+		}
+
+		.modal-close {
+			position: absolute;
+			top: -40px;
+			right: 0;
+			background: rgba(255, 255, 255, 0.2);
+			border: none;
+			color: white;
+			font-size: 2rem;
+			cursor: pointer;
+			padding: 0.5rem 1rem;
+			border-radius: 0.5rem;
+			transition: all 0.3s ease;
+		}
+
+		.modal-close:hover {
+			background: rgba(255, 255, 255, 0.3);
+		}
+
+		/* Navigation galerie */
+		.gallery-nav {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			background: rgba(255, 255, 255, 0.2);
+			border: none;
+			color: white;
+			font-size: 1.5rem;
+			cursor: pointer;
+			padding: 1rem;
+			border-radius: 50%;
+			transition: all 0.3s ease;
+		}
+
+		.gallery-nav:hover {
+			background: rgba(255, 255, 255, 0.3);
+		}
+
+		.gallery-nav.prev {
+			left: 1rem;
+		}
+
+		.gallery-nav.next {
+			right: 1rem;
+		}
+	</style>
+</head>
+<body class="bg-white text-gray-900 font-sans antialiased">
+	
+	<!-- Navbar -->
+	<nav class="sticky top-0 z-50 bg-white shadow-md">
+		<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="flex justify-between items-center h-16">
+				<a href="#hero" class="text-2xl font-bold text-blue-600">AGIL/D</a>
+		<div class="hidden md:flex space-x-8">
+			<a href="#about" class="nav-link text-gray-700 font-medium">À propos</a>
+			<a href="#services" class="nav-link text-gray-700 font-medium">Services</a>
+			<a href="#projects" class="nav-link text-gray-700 font-medium">Projets</a>
+			<a href="#testimonials" class="nav-link text-gray-700 font-medium">Clients / Partenaires</a>
+			<a href="#contact" class="nav-link text-gray-700 font-medium">Contact</a>
+			<a href="https://www.facebook.com/ousmane.thiaw.52979" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-blue-600 hover:bg-blue-700 transition-all duration-300 ml-4">
+				<svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+					<path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+				</svg>
+			</a>
+			<a href="https://www.linkedin.com/in/ousmane-thiaw-b0aa5094/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-blue-600 hover:bg-blue-700 transition-all duration-300 ml-2">
+				<svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+					<path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/>
+				</svg>
+			</a>
+		</div>
+				<button class="md:hidden text-gray-700" id="mobile-menu-btn">
+					<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+					</svg>
+				</button>
+			</div>
+			<!-- Mobile Menu -->
+			<div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2">
+				<a href="#about" class="block px-3 py-2 text-gray-700 font-medium hover:bg-blue-50 rounded">À propos</a>
+				<a href="#services" class="block px-3 py-2 text-gray-700 font-medium hover:bg-blue-50 rounded">Services</a>
+				<a href="#projects" class="block px-3 py-2 text-gray-700 font-medium hover:bg-blue-50 rounded">Projets</a>
+				<a href="#testimonials" class="block px-3 py-2 text-gray-700 font-medium hover:bg-blue-50 rounded">Clients / Partenaires</a>
+				<a href="#contact" class="block px-3 py-2 text-gray-700 font-medium hover:bg-blue-50 rounded">Contact</a>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Hero Section -->
+	<section id="hero" class="hero-gradient text-white py-40 relative overflow-hidden">
+		<div class="absolute inset-0 opacity-10">
+			<div class="absolute top-20 right-40 w-72 h-72 bg-white rounded-full mix-blend-multiply filter blur-3xl"></div>
+			<div class="absolute -bottom-8 left-20 w-72 h-72 bg-white rounded-full mix-blend-multiply filter blur-3xl"></div>
+		</div>
+		<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+			<div class="grid md:grid-cols-2 gap-12 items-center">
+				<!-- Contenu texte -->
+				<div>
+					<h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 animate-fade-in-down">
+						AGIL/D
+					</h1>
+					<p class="text-xl sm:text-2xl lg:text-3xl mb-6 text-blue-100 font-semibold animate-fade-in-up animate-stagger-1 leading-relaxed">
+						Appui à la Gestion des Initiatives Locales pour le Développement
+					</p>
+					<p class="text-lg sm:text-xl text-blue-50 max-w-2xl mb-12 animate-fade-in-up animate-stagger-2 leading-relaxed">
+						Cabinet de consultance en gestion de projet et des entreprises, spécialisé dans l'étude, le diagnostic, la planification, la communication et la mise en œuvre de projets de développement territorial et le suivi évaluation. Expertise reconnue en ingénierie sociale et économique.
+					</p>
+					<a href="/cv-ousmane-thiaw.pdf" class="btn-primary inline-block px-10 py-4 text-white font-semibold rounded-xl animate-fade-in-up animate-stagger-3 text-lg">
+						⬇ Télécharger le CV
+					</a>
+				</div>
+
+				<!-- Image 3D du directeur -->
+				<div class="hidden md:flex items-center justify-center perspective animate-fade-in-up animate-stagger-2">
+					<div class="perspective-container relative w-80 h-96">
+						<!-- Ombre 3D -->
+						<div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-72 h-20 bg-black/20 rounded-full blur-2xl"></div>
+						
+						<!-- Carte 3D -->
+						<div class="hero-card-3d relative w-full h-full rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20 backdrop-blur-md transform transition-all duration-500 hover:scale-105 hover:shadow-2xl"
+							 style="perspective: 1000px;">
+							
+							<!-- Contenu de la carte -->
+							<div class="w-full h-full bg-gradient-to-br from-blue-400 via-blue-500 to-blue-700 relative flex items-center justify-center">
+								<!-- Dégradé overlay -->
+								<div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+								
+								<!-- Photo du directeur -->
+								<div class="relative z-10 text-center">
+									<!-- Photo circulaire -->
+									<div class="w-40 md:w-48 lg:w-56 h-40 md:h-48 lg:h-56 rounded-full border-4 border-white/40 mb-6 shadow-2xl mx-auto transform transition-transform duration-500 hover:scale-110 overflow-hidden avatar-3d">
+										<img src="src/images/ousmane-thiaw.jpeg" alt="Ousmane Thiaw" class="w-full h-full object-cover">
+									</div>
+									
+									<!-- Texte sur la carte -->
+									<h3 class="text-white text-2xl font-bold mb-2">Ousmane Thiaw</h3>
+									<p class="text-white/90 text-lg font-semibold">Directeur & Fondateur</p>
+									<p class="text-white/70 text-sm mt-3">15+ ans d'expérience</p>
+									<p class="text-white/70 text-sm">Expert en développement local</p>
+								</div>
+								
+								<!-- Effets lumière 3D -->
+								<div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+							</div>
+							
+							<!-- Bordure animée -->
+							<div class="absolute inset-0 rounded-3xl border-2 border-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+						</div>
+
+						<!-- Lumière ambiante -->
+						<div class="absolute top-0 right-0 w-40 h-40 bg-blue-300/20 rounded-full blur-3xl -z-10 animate-float"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- À Propos Section -->
+	<section id="about" class="py-28 bg-white">
+		<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="text-center mb-20">
+				<h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4 animate-fade-in-up">À propos</h2>
+				<div class="separator mx-auto mt-6 animate-fade-in-up animate-stagger-1"></div>
+			</div>
+			
+			<div class="grid md:grid-cols-2 gap-16 items-center">
+				<!-- Cabinet Info -->
+				<div class="animate-slide-in-left">
+					<h3 class="text-3xl font-bold text-blue-600 mb-8 flex items-center">
+						<span class="w-1.5 h-8 bg-blue-600 rounded-full mr-4"></span>
+						AGIL/D
+					</h3>
+					<p class="text-gray-700 leading-relaxed mb-6 text-lg">
+						AGIL/D est un cabinet de consultance dédié à l'appui à la gestion des initiatives locales pour le développement. Nous accompagnons nos clients dans la conception et la mise en œuvre de projets stratégiques adaptés aux contextes locaux.
+					</p>
+					<p class="text-gray-700 leading-relaxed mb-6 text-lg">
+						Notre approche combine expertise technique, connaissance des dynamiques locales et engagement envers les résultats durables. Nous travaillons en partenariat étroit avec nos clients pour assurer la réussite de chaque initiative.
+					</p>
+					<p class="text-gray-700 leading-relaxed text-lg">
+						Avec une expérience éprouvée dans le secteur du développement, nous mettons à disposition un savoir-faire reconnu en études diagnostiques, planification stratégique, communication et suivi évaluation.
+					</p>
+				</div>
+
+				<!-- Directeur Info -->
+				<div class="bg-gradient-to-br from-blue-50 to-blue-100 p-12 rounded-2xl card-shadow animate-slide-in-right border border-blue-200">
+					<h3 class="text-3xl font-bold text-blue-700 mb-6">Directeur</h3>
+					<p class="text-5xl font-bold text-gray-900 mb-4">Ousmane Thiaw</p>
+					<div class="separator mb-8"></div>
+					<p class="text-gray-700 leading-relaxed mb-6 text-lg font-medium">
+						Expert en développement local et gestion de projets avec plus de <span class="text-blue-600 font-bold">15 années d'expérience</span>. Leadership reconnu dans l'accompagnement d'initiatives de développement durable.
+					</p>
+					<p class="text-gray-700 leading-relaxed text-lg">
+						Spécialisé en diagnostic stratégique, planification participative et renforcement des capacités institutionnelles. Passionné par la création d'<span class="text-blue-600 font-bold">impact social et économique positif</span>.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Services Section -->
+	<section id="services" class="py-28 bg-gradient-to-b from-gray-50 to-white">
+		<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="text-center mb-20">
+				<h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4 animate-fade-in-up">Services</h2>
+				<p class="text-xl text-gray-600 mb-6 animate-fade-in-up animate-stagger-1 max-w-2xl mx-auto">Notre gamme complète d'expertise pour accompagner vos initiatives</p>
+				<div class="separator mx-auto animate-fade-in-up animate-stagger-2"></div>
+			</div>
+			
+			<div class="grid md:grid-cols-3 gap-8">
+				<!-- Service 1 -->
+				<div class="service-card p-8 rounded-2xl animate-fade-in-up animate-stagger-1">
+					<svg class="icon text-blue-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+					</svg>
+					<h3 class="text-xl font-bold text-blue-600 mb-3">Étude & Diagnostic</h3>
+                    <p class="text-gray-700 leading-relaxed">Analyses ciblées pour identifier enjeux et recommandations stratégiques locales.</p>
+				</div>
+
+				<!-- Service 2 -->
+				<div class="service-card p-8 rounded-2xl animate-fade-in-up animate-stagger-2">
+					<svg class="icon text-blue-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+					</svg>
+					<h3 class="text-xl font-bold text-blue-600 mb-3">Planification</h3>
+                    <p class="text-gray-700 leading-relaxed">Plans participatifs avec calendrier, budget et indicateurs pour agir efficacement.</p>
+				</div>
+
+				<!-- Service 3 -->
+				<div class="service-card p-8 rounded-2xl animate-fade-in-up animate-stagger-3">
+					<svg class="icon text-blue-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+					</svg>
+					<h3 class="text-xl font-bold text-blue-600 mb-3">Mise en œuvre</h3>
+                    <p class="text-gray-700 leading-relaxed">Accompagnement opérationnel pour piloter et ajuster vos projets sur le terrain.</p>
+				</div>
+
+				<!-- Service 4 -->
+				<div class="service-card p-8 rounded-2xl animate-fade-in-up animate-stagger-4">
+					<svg class="icon text-blue-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+					</svg>
+					<h3 class="text-xl font-bold text-blue-600 mb-3">Suivi & Évaluation</h3>
+                    <p class="text-gray-700 leading-relaxed">Systèmes de suivi pour mesurer l'impact et orienter les décisions.</p>
+				</div>
+
+				<!-- Service 5 -->
+				<div class="service-card p-8 rounded-2xl animate-fade-in-up animate-stagger-5">
+					<svg class="icon text-blue-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C6.5 6.253 2 10.998 2 17s4.5 10.747 10 10.747c5.5 0 10-4.998 10-10.747 0-6.002-4.5-10.747-10-10.747z"></path>
+					</svg>
+					<h3 class="text-xl font-bold text-blue-600 mb-3">Formation</h3>
+                    <p class="text-gray-700 leading-relaxed">Formations et coaching pour renforcer compétences et appropriation locale.</p>
+				</div>
+
+				<!-- Service 6 -->
+				<div class="service-card p-8 rounded-2xl animate-fade-in-up animate-stagger-6">
+					<svg class="icon text-blue-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9 9 0 01-8-4H3a1 1 0 010-2h1a1 1 0 010 2h.17a7 7 0 006.83 4c3.87 0 7-3.582 7-8s-3.13-8-7-8-7 3.582-7 8a9 9 0 002 5.28"></path>
+					</svg>
+					<h3 class="text-xl font-bold text-blue-600 mb-3">Communication</h3>
+                    <p class="text-gray-700 leading-relaxed">Stratégies de communication et mobilisation pour valoriser vos projets et résultats.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Projets Section -->
+	<section id="projects" class="py-28 bg-white">
+		<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="text-center mb-20">
+				<h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4 animate-fade-in-up">Projets & Réalisations</h2>
+				<p class="text-xl text-gray-600 mb-6 animate-fade-in-up animate-stagger-1 max-w-2xl mx-auto">Découvrez nos succès et nos approches éprouvées</p>
+				<div class="separator mx-auto animate-fade-in-up animate-stagger-2"></div>
+			</div>
+			
+			<div class="grid md:grid-cols-3 gap-8">
+				<!-- Projet 1 -->
+				<div class="project-card rounded-2xl overflow-hidden animate-fade-in-up animate-stagger-1">
+					<div class="project-media-container">
+						<!-- Image principale -->
+						<div class="project-image bg-gradient-to-br from-blue-400 to-blue-600 h-48 flex items-center justify-center relative overflow-hidden">
+							<img src="src/images/ede1.jpeg" alt="Projet EDE - Assainissement" class="w-full h-full object-cover">
+							<div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+								<span class="text-white font-semibold text-lg">Voir la galerie</span>
+							</div>
+						</div>
+						
+						<!-- Miniatures galerie -->
+						<div class="p-4 bg-gray-50">
+							<div class="grid grid-cols-4 gap-2">
+								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition">
+									<img src="src/images/ede2.jpeg" alt="Projet EDE 1" class="w-full h-full object-cover">
+								</div>
+								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition">
+									<img src="src/images/ede3.jpeg" alt="Projet EDE 2" class="w-full h-full object-cover">
+								</div>
+								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition">
+									<img src="src/images/ede4.jpeg" alt="Projet EDE 3" class="w-full h-full object-cover">
+								</div>
+								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition">
+									<img src="src/images/ede5.jpeg" alt="Projet EDE 4" class="w-full h-full object-cover">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="p-6">
+						<h3 class="text-xl font-bold text-gray-900 mb-2">Assainissement de 10 villes du Sénégal – Projet ONAS</h3>
+						<p class="text-gray-600 mb-4 text-sm leading-relaxed">
+							À Kaolack, le projet ONAS a permis la réalisation d’infrastructures d’assainissement comprenant des réseaux de drainage, un bassin de rétention, une station de pompage ainsi que des édicules publics et scolaires. Le cabinet EDE Dakar, en partenariat avec AGIL/D, a assuré la formation des bénéficiaires sur l’entretien et la gestion de ces édicules à travers une approche participative. Cette intervention a favorisé l’implication des communautés locales, amélioré durablement les conditions sanitaires et renforcé les capacités des usagers pour assurer une maintenance autonome et pérenne des équipements.
+						</p>
+						<div class="flex justify-center">
+							<a href="https://www.cabinetede.com/index.php/en/our-programs/technical-assistance-onas?utm_source=chatgpt.com"
+		   target="_blank" rel="noopener noreferrer"
+		   class="btn-primary px-8 py-3 text-white font-semibold rounded-lg text-base">
+		    Voir plus
+		</a>
+						</div>
+					</div>
+				</div>
+
+				<!-- Projet 2 -->
+				<div class="project-card rounded-2xl overflow-hidden animate-fade-in-up animate-stagger-2">
+					<div class="project-media-container">
+						<!-- Image principale (vidéo principale) -->
+						<div class="project-image bg-gradient-to-br from-blue-400 to-blue-600 h-48 flex items-center justify-center relative overflow-hidden">
+							<video class="w-full h-full object-cover" muted autoplay loop>
+								<source src="src/images/agrijeune1.mp4" type="video/mp4">
+							</video>
+							<div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+								<span class="text-white font-semibold text-lg">Voir la galerie</span>
+							</div>
+						</div>
+						
+						<!-- Miniatures galerie -->
+						<div class="p-4 bg-gray-50">
+							<div class="grid grid-cols-4 gap-2">
+								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition relative">
+									<video class="w-full h-full object-cover" muted>
+										<source src="src/images/agrijeune2.mp4" type="video/mp4">
+									</video>
+									<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+										<svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+											<path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+											<path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+										</svg>
+									</div>
+								</div>
+								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition relative">
+									<video class="w-full h-full object-cover" muted>
+										<source src="src/images/agrijeune3.mp4" type="video/mp4">
+									</video>
+									<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+										<svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+											<path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+											<path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+										</svg>
+									</div>
+								</div>
+								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition relative">
+									<video class="w-full h-full object-cover" muted>
+										<source src="src/images/agrijeune4.mp4" type="video/mp4">
+									</video>
+									<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+										<svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+											<path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+											<path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+										</svg>
+									</div>
+								</div>
+								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition relative">
+									<video class="w-full h-full object-cover" muted>
+										<source src="src/images/agrijeune1.mp4" type="video/mp4">
+									</video>
+									<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+										<svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+											<path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+											<path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+										</svg>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="p-6">
+						<h3 class="text-xl font-bold text-gray-900 mb-2">Formation en Entreprenariat & Gestion Financière – Axe Nord</h3>
+						<p class="text-gray-600 mb-4 text-sm leading-relaxed">
+							Le cabinet AGIL/D a accompagné la coopérative AGRIJEUNE de l’axe Nord à travers des formations en entreprenariat et gestion financière, combinant ateliers pratiques sur la planification budgétaire et la tenue de comptes, sensibilisation à la gouvernance coopérative et à la transparence, ainsi que renforcement de l’esprit entrepreneurial et structuration des projets. Cette intervention a permis d’accroître les compétences des jeunes membres, d’améliorer leur maîtrise des outils de gestion financière et de consolider la coopérative comme acteur économique local.
+						</p>
+						<div class="flex justify-center">
+							<a href="https://sn.linkedin.com/company/agrijeunes?utm_source=chatgpt.com"
+           target="_blank" rel="noopener noreferrer"
+           class="btn-primary px-8 py-3 text-white font-semibold rounded-lg text-base">
+            Voir plus
+        </a>
+						</div>
+					</div>
+				</div>
+
+				<!-- Projet 3 -->
+				<div class="project-card rounded-2xl overflow-hidden animate-fade-in-up animate-stagger-3">
+					<div class="project-media-container">
+						<!-- Image principale -->
+						<div class="project-image bg-gradient-to-br from-blue-400 to-blue-600 h-48 flex items-center justify-center relative overflow-hidden">
+							<img src="src/images/adepme1.jpeg" alt="Conseil ADEPME" class="w-full h-full object-cover">
+							<div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+								<span class="text-white font-semibold text-lg">Voir la galerie</span>
+							</div>
+						</div>
+						
+						<!-- Miniatures galerie -->
+						<div class="p-4 bg-gray-50">
+							<div class="grid grid-cols-4 gap-2">
+								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition">
+									<img src="src/images/adepme2.jpeg" alt="ADEPME 1" class="w-full h-full object-cover">
+								</div>
+								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition">
+									<img src="src/images/adepme3.jpeg" alt="ADEPME 2" class="w-full h-full object-cover">
+								</div>
+								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition">
+									<img src="src/images/adepme4.jpeg" alt="ADEPME 3" class="w-full h-full object-cover">
+								</div>
+								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition">
+									<img src="src/images/adepme5.jpeg" alt="ADEPME 4" class="w-full h-full object-cover">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="p-6">
+						<h3 class="text-xl font-bold text-gray-900 mb-2">Conseil d’Entreprise & Gestion de Projet – ADEPME</h3>
+						<p class="text-gray-600 mb-4 text-sm leading-relaxed">
+							Le cabinet AGIL/D, formalisé par l’ADEPME comme Conseil d’Entreprise et de Gestion de Projet, accompagne les PME dans leur structuration et leur développement. Ses interventions portent sur le conseil stratégique en organisation, planification et suivi de projets, ainsi que sur le renforcement des capacités des entrepreneurs pour améliorer leur performance et assurer la durabilité de leurs initiatives. Cette reconnaissance officielle confirme AGIL/D comme partenaire de référence auprès des entreprises, contribuant à la compétitivité des structures accompagnées et au développement économique local.
+
+						</p>
+						<div class="flex justify-center">
+							<a href="https://adepme.sn/accompagnement/?utm_source=chatgpt.com"
+           target="_blank" rel="noopener noreferrer"
+           class="btn-primary px-8 py-3 text-white font-semibold rounded-lg text-base">
+            Voir plus
+        </a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Clients / Partenaires Section -->
+	<section id="testimonials" class="py-28 bg-gradient-to-b from-gray-50 to-white">
+		<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="text-center mb-12">
+				<h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4 animate-fade-in-up">Clients / Partenaires</h2>
+				<p class="text-lg text-gray-600 mb-6 animate-fade-in-up animate-stagger-1 max-w-2xl mx-auto">Une sélection d'organisations, entreprises, ONG et GIE avec lesquelles nous avons collaboré — sélectionnez un logo pour en savoir plus.</p>
+				<div class="separator mx-auto animate-fade-in-up animate-stagger-2"></div>
+			</div>
+
+			<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 items-stretch">
+				<!-- Partner 1 -->
+				<a href="https://adepme.sn/accompagnement/?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="block p-6 bg-white/70 rounded-lg shadow-sm hover:shadow-md transition transform hover:-translate-y-1 text-center">
+					<img src="src/logos/adepme.png" class="mx-auto h-24 object-contain mb-4">
+					<h4 class="font-bold text-gray-900">Adepme</h4>
+					<p class="text-sm text-gray-600 mt-2">L’ADEPME est l’Agence de Développement et d’Encadrement des Petites et Moyennes Entreprises du Sénégal, chargée de soutenir, accompagner et formaliser les PME pour renforcer leur compétitivité et leur contribution à l’économie nationale.</p>
+				</a>
+
+				<!-- Partner 2 -->
+				<a href="https://sn.linkedin.com/company/agrijeunes?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="block p-6 bg-white/70 rounded-lg shadow-sm hover:shadow-md transition transform hover:-translate-y-1 text-center">
+					<img src="src/logos/agrijeune.png" class="mx-auto h-24 object-contain mb-4">
+					<h4 class="font-bold text-gray-900">Agrijeune</h4>
+					<p class="text-sm text-gray-600 mt-2">AGRIJEUNE est une société coopérative de jeunes de l’axe Nord, engagée dans le développement économique local à travers l’entreprenariat, la gestion financière et la structuration de projets collectifs.</p>
+				</a>
+
+				<!-- Partner 3 -->
+				<a href="https://www.cabinetede.com/index.php/en/our-programs/technical-assistance-onas?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="block p-6 bg-white/70 rounded-lg shadow-sm hover:shadow-md transition transform hover:-translate-y-1 text-center">
+					<img src="src/logos/ede.webp" class="mx-auto h-24 object-contain mb-4">
+					<h4 class="font-bold text-gray-900">Cabinet EDE</h4>
+					<p class="text-sm text-gray-600 mt-2">Le Cabinet EDE Dakar est une société d’ingénierie-conseil panafricaine spécialisée dans l’eau, l’assainissement et l’environnement, qui accompagne les projets par des solutions techniques et sociales durables.</p>
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Modal Galerie Média -->
+	<div id="mediaModal" class="media-modal">
+		<div class="modal-content">
+			<button class="modal-close" onclick="closeMediaModal()">&times;</button>
+			<button class="gallery-nav prev" onclick="navigateMedia(-1)">‹</button>
+			<button class="gallery-nav next" onclick="navigateMedia(1)">›</button>
+			<div id="modalMediaContainer"></div>
+		</div>
+	</div>
+
+	<!-- Contact Section -->
+	<section id="contact" class="py-28 bg-white">
+		<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="text-center mb-20">
+				<h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4 animate-fade-in-up">Contact</h2>
+				<p class="text-xl text-gray-600 mb-6 animate-fade-in-up animate-stagger-1 max-w-2xl mx-auto">Parlez-nous de vos projets et enjeux</p>
+				<div class="separator mx-auto animate-fade-in-up animate-stagger-2"></div>
+			</div>
+			
+			<div class="grid md:grid-cols-2 gap-16">
+				<!-- Infos Contact -->
+				<div class="animate-slide-in-left">
+				<h3 class="text-3xl font-bold text-gray-900 mb-10 flex items-center">
+					<span class="w-1.5 h-8 bg-blue-600 rounded-full mr-4"></span>
+					Prenons contact
+				</h3>
+					
+				<div class="mb-10 flex items-start group">
+					<svg class="w-6 h-6 text-blue-600 mr-5 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+					</svg>
+					<div>
+						<p class="font-bold text-gray-900 text-lg">Email</p>
+							<p class="text-gray-700">agildev65@gmail.com</p>
+						</div>
+					</div>
+
+				<div class="mb-10 flex items-start group">
+					<svg class="w-6 h-6 text-blue-600 mr-5 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 00.948.684l1.498 4.493a1 1 0 00.502.756l2.73 1.365a1 1 0 001.27-1.27l-1.365-2.73a1 1 0 00.756-.502l4.493-1.498a1 1 0 00.684-.948V5a2 2 0 00-2-2h-2.5a2.5 2.5 0 00-2.5 2.5v.006h-.004a2 2 0 00-2 2v2.5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2V8a2 2 0 00-2-2h-2.5a2 2 0 00-2-2v-.006zm5 10.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"></path>
+					</svg>
+					<div>
+						<p class="font-bold text-gray-900 text-lg">Téléphone</p>
+            <p class="text-gray-700">775264241 | 765685823</p>
+						</div>
+					</div>
+
+				<div class="flex items-start group">
+					<svg class="w-6 h-6 text-blue-600 mr-5 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+					</svg>
+					<div>
+						<p class="font-bold text-gray-900 text-lg">Localisation</p>
+						<p class="text-gray-700">Santhiaba Sud, Louga</p>
+            <p class="text-gray-700">Sénégal</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- Formulaire Contact -->
+				<div class="bg-gradient-to-br from-gray-50 to-gray-100 p-10 rounded-2xl animate-slide-in-right card-shadow border border-gray-100">
+					<form id="contactForm">
+						<div class="mb-6">
+							<label class="block text-gray-700 font-semibold mb-2">Nom</label>
+							<input type="text" id="contactName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600" placeholder="Votre nom" required>
+						</div>
+
+						<div class="mb-6">
+							<label class="block text-gray-700 font-semibold mb-2">Email</label>
+							<input type="email" id="contactEmail" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600" placeholder="Votre email" required>
+						</div>
+
+						<div class="mb-6">
+							<label class="block text-gray-700 font-semibold mb-2">Sujet</label>
+							<input type="text" id="contactSubject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600" placeholder="Sujet de votre message" required>
+						</div>
+
+						<div class="mb-6">
+							<label class="block text-gray-700 font-semibold mb-2">Message</label>
+							<textarea id="contactMessage" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600" rows="5" placeholder="Votre message..." required></textarea>
+						</div>
+
+						<div class="flex gap-4">
+							<button type="button" onclick="sendViaWhatsapp()" class="flex-1 bg-green-500 hover:bg-green-600 transition py-3 text-white font-semibold rounded-lg flex items-center justify-center gap-2">
+								<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+									<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.393-1.476-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-5.031 1.378c-3.055 2.282-4.997 5.851-4.997 9.52 0 5.054 4.113 9.167 9.169 9.167 2.397 0 4.643-.639 6.582-1.85l9.153 3.323a.75.75 0 001.006-.682l-.003-9.453c.505-1.45.756-2.954.756-4.514 0-5.059-4.11-9.169-9.168-9.169z"/>
+								</svg>
+								Envoyer via WhatsApp
+							</button>
+							<button type="button" onclick="sendViaEmail()" class="flex-1 bg-blue-600 hover:bg-blue-700 transition py-3 text-white font-semibold rounded-lg flex items-center justify-center gap-2">
+								<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+								</svg>
+								Envoyer par Email
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer class="footer-gradient text-white py-16">
+		<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="grid md:grid-cols-3 gap-8 mb-12">
+				<div>
+					<h3 class="text-xl font-bold mb-4">AGIL/D</h3>
+					<p class="text-blue-100 mb-6">
+						Cabinet de consultance spécialisé en développement local et gestion de projets.
+					</p>
+					<p class="text-blue-200 text-sm font-medium mb-4">Adresse</p>
+					<p class="text-blue-100">Santhiaba Sud, Louga<br>Sénégal</p>
+				</div>
+				<div>
+					<h3 class="text-xl font-bold mb-4">Services</h3>
+					<ul class="text-blue-100 space-y-2 text-sm">
+						<li><a href="#services" class="hover:text-white transition">Étude & Diagnostic</a></li>
+						<li><a href="#services" class="hover:text-white transition">Planification</a></li>
+						<li><a href="#services" class="hover:text-white transition">Mise en œuvre</a></li>
+						<li><a href="#services" class="hover:text-white transition">Suivi & Évaluation</a></li>
+					</ul>
+				</div>
+				<div>
+					<h3 class="text-xl font-bold mb-4">Nous Suivre</h3>
+					<div class="flex space-x-4 mb-6">
+						<a href="https://www.facebook.com/ousmane.thiaw.52979" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-white/10 hover:bg-white/20 transition-all duration-300">
+							<svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+							</svg>
+						</a>
+						<a href="https://www.linkedin.com/in/ousmane-thiaw-b0aa5094/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-white/10 hover:bg-white/20 transition-all duration-300">
+							<svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/>
+							</svg>
+						</a>
+					</div>
+					<h3 class="text-xl font-bold mb-4">Légal</h3>
+					<ul class="text-blue-100 space-y-2 text-sm">
+						<li><a href="#" class="hover:text-white transition legal-link" data-doc="privacy">Politique de confidentialité</a></li>
+						<li><a href="#" class="hover:text-white transition legal-link" data-doc="terms">Conditions d'utilisation</a></li>
+						<li><a href="#" class="hover:text-white transition legal-link" data-doc="legal">Mentions légales</a></li>
+					</ul>
+				</div>
+			</div>
+      <div class="border-t border-white/30 pt-8 text-center text-white text-sm">
+        <p>&copy; 2024 AGIL/D - Appui à la Gestion des Initiatives Locales pour le Développement. Tous droits réservés.</p>
+      </div>
+		</div>
+	</footer>
+
+	<!-- Modals for legal documents -->
+	<div id="legal-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+		<div class="bg-white rounded-lg max-w-2xl p-6 overflow-auto max-h-full">
+			<h2 id="legal-title" class="text-2xl font-bold mb-4">Titre</h2>
+			<div id="legal-content" class="text-gray-800 text-sm leading-relaxed mb-6">
+				<!-- dynamic text -->
+			</div>
+			<button id="legal-close" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Fermer</button>
+		</div>
+	</div>
+
+	<script>
+		// Mobile menu toggle
+		const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+		const mobileMenu = document.getElementById('mobile-menu');
+
+		mobileMenuBtn.addEventListener('click', () => {
+			mobileMenu.classList.toggle('hidden');
+		});
+
+		// Close mobile menu when clicking on a link
+		const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+		mobileMenuLinks.forEach(link => {
+			link.addEventListener('click', () => {
+				mobileMenu.classList.add('hidden');
+			});
+		});
+
+		// Legal document modal handling
+		const legalModal = document.getElementById('legal-modal');
+		const legalTitle = document.getElementById('legal-title');
+		const legalContent = document.getElementById('legal-content');
+		const legalClose = document.getElementById('legal-close');
+		
+		const docs = {
+			privacy: {
+				title: 'Politique de confidentialité',
+				text: `Nous collectons uniquement les informations nécessaires pour répondre à vos demandes via le formulaire de contact. Les données ne sont pas partagées ni conservées au-delà des besoins de communication. En soumettant un message, vous consentez à ce que vos informations soient utilisées conformément à cette politique.`
+			},
+			terms: {
+				title: 'Conditions d\'utilisation',
+				text: `Ce site est un portfolio professionnel. Les contenus sont fournis à titre informatif; AGIL/D décline toute responsabilité en cas d\'erreur ou d\'omission. Les utilisateurs s\'engagent à ne pas utiliser les informations à des fins illégales et à respecter les droits d\'auteur liés aux éléments affichés ici.`
+			},
+			legal: {
+				title: 'Mentions légales',
+				text: `Propriétaire du site : AGIL/D (Ousmane Thiaw). Adresse : Santhiaba Sud, Louga, Sénégal. Hébergement : (ajoutez le nom de l\'hébergeur). En vertu de la loi, toutes les informations concernant l\'identité de l\'éditeur sont accessibles sur demande.`
+			}
+		};
+		
+		// open modal when clicking links
+		document.querySelectorAll('.legal-link').forEach(a => {
+			a.addEventListener('click', e => {
+				e.preventDefault();
+				const key = a.getAttribute('data-doc');
+				if (docs[key]) {
+					legalTitle.textContent = docs[key].title;
+					legalContent.textContent = docs[key].text;
+					legalModal.classList.remove('hidden');
+				}
+			});
+		});
+		
+		legalClose.addEventListener('click', () => {
+			legalModal.classList.add('hidden');
+		});
+
+
+		// Fonctions de contact
+		function getFormData() {
+			return {
+				name: document.getElementById('contactName').value,
+				email: document.getElementById('contactEmail').value,
+				subject: document.getElementById('contactSubject').value,
+				message: document.getElementById('contactMessage').value
+			};
+		}
+
+		function sendViaWhatsapp() {
+			const data = getFormData();
+			if (!data.name || !data.email || !data.subject || !data.message) {
+				alert('Veuillez remplir tous les champs');
+				return;
+			}
+
+			const whatsappNumber = '221775264241'; // Numéro WhatsApp
+			const text = `*Nouveau message AGIL/D*\n\n*Nom:* ${data.name}\n*Email:* ${data.email}\n*Sujet:* ${data.subject}\n\n*Message:*\n${data.message}`;
+			const encodedText = encodeURIComponent(text);
+			const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedText}`;
+			window.open(whatsappUrl, '_blank');
+		}
+
+		function sendViaEmail() {
+			const data = getFormData();
+			if (!data.name || !data.email || !data.subject || !data.message) {
+				alert('Veuillez remplir tous les champs');
+				return;
+			}
+
+			// Créer le formulaire de données
+			const formData = new FormData();
+			formData.append('name', data.name);
+			formData.append('email', data.email);
+			formData.append('subject', data.subject);
+			formData.append('message', data.message);
+
+			// Envoyer via Formspree
+			fetch('https://formspree.io/f/myzppldy', {
+				method: 'POST',
+				body: formData,
+				headers: {
+					'Accept': 'application/json'
+				}
+			})
+			.then(response => {
+				if (response.ok) {
+					alert('Message envoyé avec succès! Nous vous répondrons bientôt.');
+					document.getElementById('contactForm').reset();
+				} else {
+					alert('Erreur lors de l\'envoi. Veuillez réessayer.');
+				}
+			})
+			.catch(error => {
+				console.error('Erreur:', error);
+				alert('Erreur de connexion. Vérifiez votre connexion Internet.');
+			});
+		}
+
+		// Galerie multimédia
+		let currentMediaIndex = 0;
+		let currentMediaArray = [];
+		let isVideo = false;
+
+		// Initialiser les galeries
+		document.addEventListener('DOMContentLoaded', function() {
+			initializeGalleries();
+		});
+
+		function initializeGalleries() {
+			// Ajouter les écouteurs d'événements aux miniatures
+			document.querySelectorAll('.thumbnail').forEach((thumbnail, index) => {
+				thumbnail.addEventListener('click', function() {
+					const mediaContainer = this.closest('.project-media-container');
+					const thumbnails = mediaContainer.querySelectorAll('.thumbnail');
+					const mediaArray = Array.from(thumbnails).map(thumb => {
+						const img = thumb.querySelector('img');
+						const video = thumb.querySelector('video');
+						if (img) return { type: 'image', src: img.src, alt: img.alt };
+						if (video) return { type: 'video', src: video.querySelector('source').src };
+						return null;
+					}).filter(Boolean);
+					
+					currentMediaIndex = thumbnails.indexOf(this);
+					currentMediaArray = mediaArray;
+					openMediaModal();
+				});
+			});
+
+			// Ajouter les écouteurs pour les images principales
+			document.querySelectorAll('.project-image').forEach(imageContainer => {
+				imageContainer.addEventListener('click', function() {
+					const img = this.querySelector('img');
+					if (img) {
+						currentMediaArray = [{ type: 'image', src: img.src, alt: img.alt }];
+						currentMediaIndex = 0;
+						openMediaModal();
+					}
+				});
+			});
+
+			// Fermer le modal en cliquant à l'extérieur
+			document.getElementById('mediaModal').addEventListener('click', function(e) {
+				if (e.target === this) {
+					closeMediaModal();
+				}
+			});
+
+			// Navigation avec les touches du clavier
+			document.addEventListener('keydown', function(e) {
+				if (document.getElementById('mediaModal').classList.contains('active')) {
+					if (e.key === 'Escape') closeMediaModal();
+					if (e.key === 'ArrowLeft') navigateMedia(-1);
+					if (e.key === 'ArrowRight') navigateMedia(1);
+				}
+			});
+		}
+
+		function openMediaModal() {
+			const modal = document.getElementById('mediaModal');
+			modal.classList.add('active');
+			displayCurrentMedia();
+			document.body.style.overflow = 'hidden'; // Empêcher le scroll
+		}
+
+		function closeMediaModal() {
+			const modal = document.getElementById('mediaModal');
+			modal.classList.remove('active');
+			document.body.style.overflow = ''; // Réactiver le scroll
+			
+			// Arrêter la vidéo si elle est en lecture
+			const video = document.querySelector('#modalMediaContainer video');
+			if (video) {
+				video.pause();
+				video.currentTime = 0;
+			}
+		}
+
+		function displayCurrentMedia() {
+			const container = document.getElementById('modalMediaContainer');
+			const media = currentMediaArray[currentMediaIndex];
+			
+			if (media.type === 'image') {
+				container.innerHTML = `<img src="${media.src}" alt="${media.alt || 'Image du projet'}">`;
+			} else if (media.type === 'video') {
+				container.innerHTML = `
+					<video controls autoplay>
+						<source src="${media.src}" type="video/mp4">
+						Votre navigateur ne supporte pas les vidéos.
+					</video>
+				`;
+			}
+		}
+
+		function navigateMedia(direction) {
+			currentMediaIndex += direction;
+			
+			// Gérer la navigation circulaire
+			if (currentMediaIndex < 0) {
+				currentMediaIndex = currentMediaArray.length - 1;
+			} else if (currentMediaIndex >= currentMediaArray.length) {
+				currentMediaIndex = 0;
+			}
+			
+			displayCurrentMedia();
+		}
+
+		// Ajouter les classes CSS aux miniatures existantes
+		document.addEventListener('DOMContentLoaded', function() {
+			document.querySelectorAll('.project-media-container .aspect-square').forEach(thumb => {
+				thumb.classList.add('thumbnail');
+			});
+			
+			// Ajouter l'icône vidéo animée
+			document.querySelectorAll('.thumbnail video').forEach(video => {
+				const overlay = video.parentElement.querySelector('.absolute');
+				if (overlay) {
+					overlay.querySelector('svg').classList.add('video-icon');
+				}
+			});
+		});
+	</script>
+
+</body>
+</html>
