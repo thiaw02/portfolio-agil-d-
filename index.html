@@ -1107,15 +1107,9 @@
 						<div class="flex gap-4">
 							<button type="button" onclick="sendViaWhatsapp()" class="flex-1 bg-green-500 hover:bg-green-600 transition py-3 text-white font-semibold rounded-lg flex items-center justify-center gap-2">
 								<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-									<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.393-1.476-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-5.031 1.378c-3.055 2.282-4.997 5.851-4.997 9.52 0 5.054 4.113 9.167 9.169 9.167 2.397 0 4.643-.639 6.582-1.85l9.153 3.323a.75.75 0 001.006-.682l-.003-9.453c.505-1.45.756-2.954.756-4.514 0-5.059-4.11-9.169-9.168-9.169z"/>
+									<path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 012.41 5.83c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.39-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.188 8.188 0 01-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24h.01M8.53 7.33c-.16 0-.43.06-.66.31-.22.25-.87.86-.87 2.07 0 1.22.89 2.39 1 2.56.12.17 1.76 2.67 4.25 3.73.59.27 1.05.42 1.41.53.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.16-.48-.27-.25-.14-1.47-.74-1.69-.82-.23-.08-.37-.12-.56.12-.16.25-.64.81-.78.97-.15.17-.29.19-.53.07-.26-.13-1.06-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.12-.24-.01-.39.11-.5.11-.08.24-.21.35-.3.13-.09.23-.19.3-.31.1-.17.07-.33-.02-.48-.09-.15-.42-1.06-.58-1.46-.16-.39-.32-.34-.43-.35-.11-.01-.24-.01-.37-.01z"/>
 								</svg>
 								Envoyer via WhatsApp
-							</button>
-							<button type="button" onclick="sendViaEmail()" class="flex-1 bg-blue-600 hover:bg-blue-700 transition py-3 text-white font-semibold rounded-lg flex items-center justify-center gap-2">
-								<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-								</svg>
-								Envoyer par Email
 							</button>
 						</div>
 					</form>
@@ -1262,42 +1256,6 @@
 			const encodedText = encodeURIComponent(text);
 			const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedText}`;
 			window.open(whatsappUrl, '_blank');
-		}
-
-		function sendViaEmail() {
-			const data = getFormData();
-			if (!data.name || !data.email || !data.subject || !data.message) {
-				alert('Veuillez remplir tous les champs');
-				return;
-			}
-
-			// Créer le formulaire de données
-			const formData = new FormData();
-			formData.append('name', data.name);
-			formData.append('email', data.email);
-			formData.append('subject', data.subject);
-			formData.append('message', data.message);
-
-			// Envoyer via Formspree
-			fetch('https://formspree.io/f/myzppldy', {
-				method: 'POST',
-				body: formData,
-				headers: {
-					'Accept': 'application/json'
-				}
-			})
-			.then(response => {
-				if (response.ok) {
-					alert('Message envoyé avec succès! Nous vous répondrons bientôt.');
-					document.getElementById('contactForm').reset();
-				} else {
-					alert('Erreur lors de l\'envoi. Veuillez réessayer.');
-				}
-			})
-			.catch(error => {
-				console.error('Erreur:', error);
-				alert('Erreur de connexion. Vérifiez votre connexion Internet.');
-			});
 		}
 
 		// Galerie multimédia
