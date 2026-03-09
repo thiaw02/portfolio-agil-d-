@@ -586,6 +586,58 @@
 		.gallery-nav.next {
 			right: 1rem;
 		}
+
+		/* Effet pour miniatures cliquables */
+		.thumbnail {
+			transition: all 0.3s ease;
+			cursor: pointer;
+			position: relative;
+		}
+
+		.thumbnail:hover {
+			transform: scale(1.05);
+			box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+			z-index: 10;
+		}
+
+		.thumbnail:active {
+			transform: scale(0.95);
+		}
+
+		.thumbnail::after {
+			content: '';
+			position: absolute;
+			inset: 0;
+			border: 2px solid transparent;
+			border-radius: 0.375rem;
+			transition: all 0.3s ease;
+		}
+
+		.thumbnail:hover::after {
+			border-color: #3b82f6;
+		}
+
+		/* Flèches de navigation sur images principales */
+		.project-image:hover .nav-arrow {
+			opacity: 1 !important;
+		}
+
+		.nav-arrow {
+			z-index: 10;
+			backdrop-filter: blur(4px);
+		}
+
+		.nav-arrow:hover {
+			transform: translate(-50%, -50%) scale(1.1);
+		}
+
+		.nav-prev:hover {
+			transform: translate(-50%, -50%) scale(1.1);
+		}
+
+		.nav-next:hover {
+			transform: translate(-50%, -50%) scale(1.1);
+		}
 	</style>
 </head>
 <body class="bg-white text-gray-900 font-sans antialiased">
@@ -648,9 +700,6 @@
 					<p class="text-lg sm:text-xl text-blue-50 max-w-2xl mb-12 animate-fade-in-up animate-stagger-2 leading-relaxed">
 						Cabinet de consultance en gestion de projet et des entreprises, spécialisé dans l'étude, le diagnostic, la planification, la communication et la mise en œuvre de projets de développement territorial et le suivi évaluation. Expertise reconnue en ingénierie sociale et économique.
 					</p>
-					<a href="/cv-ousmane-thiaw.pdf" class="btn-primary inline-block px-10 py-4 text-white font-semibold rounded-xl animate-fade-in-up animate-stagger-3 text-lg">
-						⬇ Télécharger le CV
-					</a>
 				</div>
 
 				<!-- Image 3D du directeur -->
@@ -714,7 +763,7 @@
 						AGIL/D
 					</h3>
 					<p class="text-gray-700 leading-relaxed mb-6 text-lg">
-						AGIL/D est un cabinet de consultance dédié à l'appui à la gestion des initiatives locales pour le développement. Nous accompagnons nos clients dans la conception et la mise en œuvre de projets stratégiques adaptés aux contextes locaux.
+						AGIL/D est un cabinet de consultance dédié à l'appui à la gestion des initiatives locales pour le développement. Nous accompagnons nos clients dans la conception et la mise en œuvre de projets stratégiques et structurant adaptés aux contextes locaux.
 					</p>
 					<p class="text-gray-700 leading-relaxed mb-6 text-lg">
 						Notre approche combine expertise technique, connaissance des dynamiques locales et engagement envers les résultats durables. Nous travaillons en partenariat étroit avec nos clients pour assurer la réussite de chaque initiative.
@@ -809,175 +858,345 @@
 
 	<!-- Projets Section -->
 	<section id="projects" class="py-28 bg-white">
-		<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-			<div class="text-center mb-20">
-				<h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4 animate-fade-in-up">Projets & Réalisations</h2>
-				<p class="text-xl text-gray-600 mb-6 animate-fade-in-up animate-stagger-1 max-w-2xl mx-auto">Découvrez nos succès et nos approches éprouvées</p>
-				<div class="separator mx-auto animate-fade-in-up animate-stagger-2"></div>
-			</div>
-			
-			<div class="grid md:grid-cols-3 gap-8">
-				<!-- Projet 1 -->
-				<div class="project-card rounded-2xl overflow-hidden animate-fade-in-up animate-stagger-1">
-					<div class="project-media-container">
-						<!-- Image principale -->
-						<div class="project-image bg-gradient-to-br from-blue-400 to-blue-600 h-48 flex items-center justify-center relative overflow-hidden">
-							<img src="src/images/ede1.jpeg" alt="Projet EDE - Assainissement" class="w-full h-full object-cover">
-							<div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
-								<span class="text-white font-semibold text-lg">Voir la galerie</span>
-							</div>
+	<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="text-center mb-20">
+			<h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4 animate-fade-in-up">Projets & Réalisations</h2>
+			<p class="text-xl text-gray-600 mb-6 animate-fade-in-up animate-stagger-1 max-w-2xl mx-auto">Découvrez nos succès et nos approches éprouvées</p>
+			<div class="separator mx-auto animate-fade-in-up animate-stagger-2"></div>
+		</div>
+		
+		<!-- Première ligne : 3 projets -->
+		<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+			<!-- Projet 1 -->
+			<div class="project-card rounded-2xl overflow-hidden animate-fade-in-up animate-stagger-1">
+				<div class="project-media-container">
+					<!-- Image principale -->
+					<div class="project-image bg-gradient-to-br from-blue-400 to-blue-600 h-48 flex items-center justify-center relative overflow-hidden">
+						<img src="src/images/ede1.jpeg" alt="Projet EDE - Assainissement" class="w-full h-full object-cover">
+						<div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+							<span class="text-white font-semibold text-lg">Voir la galerie</span>
 						</div>
-						
-						<!-- Miniatures galerie -->
-						<div class="p-4 bg-gray-50">
-							<div class="grid grid-cols-4 gap-2">
-								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition">
-									<img src="src/images/ede2.jpeg" alt="Projet EDE 1" class="w-full h-full object-cover">
-								</div>
-								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition">
-									<img src="src/images/ede3.jpeg" alt="Projet EDE 2" class="w-full h-full object-cover">
-								</div>
-								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition">
-									<img src="src/images/ede4.jpeg" alt="Projet EDE 3" class="w-full h-full object-cover">
-								</div>
-								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition">
-									<img src="src/images/ede5.jpeg" alt="Projet EDE 4" class="w-full h-full object-cover">
-								</div>
-							</div>
-						</div>
+						<!-- Flèches de navigation -->
+						<button class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition-all duration-300 opacity-0 hover:opacity-100 nav-arrow nav-prev" data-project="ede">
+							<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+							</svg>
+						</button>
+						<button class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition-all duration-300 opacity-0 hover:opacity-100 nav-arrow nav-next" data-project="ede">
+							<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+							</svg>
+						</button>
 					</div>
-					<div class="p-6">
-						<h3 class="text-xl font-bold text-gray-900 mb-2">Assainissement de 10 villes du Sénégal – Projet ONAS</h3>
-						<p class="text-gray-600 mb-4 text-sm leading-relaxed">
-							À Kaolack, le projet ONAS a permis la réalisation d’infrastructures d’assainissement comprenant des réseaux de drainage, un bassin de rétention, une station de pompage ainsi que des édicules publics et scolaires. Le cabinet EDE Dakar, en partenariat avec AGIL/D, a assuré la formation des bénéficiaires sur l’entretien et la gestion de ces édicules à travers une approche participative. Cette intervention a favorisé l’implication des communautés locales, amélioré durablement les conditions sanitaires et renforcé les capacités des usagers pour assurer une maintenance autonome et pérenne des équipements.
-						</p>
-						<div class="flex justify-center">
-							<a href="https://www.cabinetede.com/index.php/en/our-programs/technical-assistance-onas?utm_source=chatgpt.com"
-		   target="_blank" rel="noopener noreferrer"
-		   class="btn-primary px-8 py-3 text-white font-semibold rounded-lg text-base">
-		    Voir plus
-		</a>
+					
+					<!-- Miniatures galerie -->
+					<div class="p-4 bg-gray-50">
+						<div class="grid grid-cols-4 gap-2">
+							<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition thumbnail" title="Cliquez pour voir en grand">
+								<img src="src/images/ede2.jpeg" alt="Projet EDE 1" class="w-full h-full object-cover">
+							</div>
+							<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition thumbnail" title="Cliquez pour voir en grand">
+								<img src="src/images/ede3.jpeg" alt="Projet EDE 2" class="w-full h-full object-cover">
+							</div>
+							<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition thumbnail" title="Cliquez pour voir en grand">
+								<img src="src/images/ede4.jpeg" alt="Projet EDE 3" class="w-full h-full object-cover">
+							</div>
+							<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition thumbnail" title="Cliquez pour voir en grand">
+								<img src="src/images/ede5.jpeg" alt="Projet EDE 4" class="w-full h-full object-cover">
+							</div>
 						</div>
 					</div>
 				</div>
+				<div class="p-6">
+					<h3 class="text-xl font-bold text-gray-900 mb-2">Assainissement de 10 villes du Sénégal – Projet ONAS</h3>
+					<p class="text-gray-600 mb-4 text-sm leading-relaxed">
+						À Kaolack, le projet ONAS a permis la réalisation d'infrastructures d'assainissement comprenant des réseaux de drainage, un bassin de rétention, une station de pompage ainsi que des édicules publics et scolaires. Le cabinet EDE Dakar, en partenariat avec AGIL/D, a assuré la formation des bénéficiaires sur l'entretien et la gestion de ces édicules à travers une approche participative. Cette intervention a favorisé l'implication des communautés locales, amélioré durablement les conditions sanitaires et renforcé les capacités des usagers pour assurer une maintenance autonome et pérenne des équipements.
+					</p>
+					<div class="flex justify-center">
+						<a href="https://www.cabinetede.com/index.php/en/our-programs/technical-assistance-onas?utm_source=chatgpt.com"
+            target="_blank" rel="noopener noreferrer"
+            class="btn-primary px-8 py-3 text-white font-semibold rounded-lg text-base">
+            Voir plus
+        </a>
+					</div>
+				</div>
+			</div>
 
-				<!-- Projet 2 -->
-				<div class="project-card rounded-2xl overflow-hidden animate-fade-in-up animate-stagger-2">
+			<!-- Projet 2 -->
+			<div class="project-card rounded-2xl overflow-hidden animate-fade-in-up animate-stagger-2">
+				<div class="project-media-container">
+					<!-- Image principale (vidéo principale) -->
+					<div class="project-image bg-gradient-to-br from-blue-400 to-blue-600 h-48 flex items-center justify-center relative overflow-hidden">
+						<video class="w-full h-full object-cover" muted autoplay loop>
+							<source src="src/images/agrijeune1.mp4" type="video/mp4">
+						</video>
+						<div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+							<span class="text-white font-semibold text-lg">Voir la galerie</span>
+						</div>
+						<!-- Flèches de navigation -->
+						<button class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition-all duration-300 opacity-0 hover:opacity-100 nav-arrow nav-prev" data-project="agrijeune">
+							<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+							</svg>
+						</button>
+						<button class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition-all duration-300 opacity-0 hover:opacity-100 nav-arrow nav-next" data-project="agrijeune">
+							<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+							</svg>
+						</button>
+					</div>
+					
+					<!-- Miniatures galerie -->
+					<div class="p-4 bg-gray-50">
+						<div class="grid grid-cols-4 gap-2">
+							<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition relative thumbnail" title="Cliquez pour voir en grand">
+								<video class="w-full h-full object-cover" muted>
+									<source src="src/images/agrijeune2.mp4" type="video/mp4">
+								</video>
+								<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+									<svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+										<path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+										<path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+									</svg>
+								</div>
+							</div>
+							<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition relative thumbnail" title="Cliquez pour voir en grand">
+								<video class="w-full h-full object-cover" muted>
+									<source src="src/images/agrijeune3.mp4" type="video/mp4">
+								</video>
+								<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+									<svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+										<path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+										<path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+									</svg>
+								</div>
+							</div>
+							<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition relative thumbnail" title="Cliquez pour voir en grand">
+								<video class="w-full h-full object-cover" muted>
+									<source src="src/images/agrijeune4.mp4" type="video/mp4">
+								</video>
+								<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+									<svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+										<path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+										<path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+									</svg>
+								</div>
+							</div>
+							<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition relative thumbnail" title="Cliquez pour voir en grand">
+								<video class="w-full h-full object-cover" muted>
+									<source src="src/images/agrijeune1.mp4" type="video/mp4">
+								</video>
+								<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+									<svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+										<path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+										<path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+									</svg>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="p-6">
+					<h3 class="text-xl font-bold text-gray-900 mb-2">Formation en Entreprenariat & Gestion Financière – Axe Nord</h3>
+					<p class="text-gray-600 mb-4 text-sm leading-relaxed">
+						Le cabinet AGIL/D a accompagné la coopérative AGRIJEUNE de l'axe Nord à travers des formations en entreprenariat et gestion financière, combinant ateliers pratiques sur la planification budgétaire et la tenue de comptes, sensibilisation à la gouvernance coopérative et à la transparence, ainsi que renforcement de l'esprit entrepreneurial et structuration des projets. Cette intervention a permis d'accroître les compétences des jeunes membres, d'améliorer leur maîtrise des outils de gestion financière et de consolider la coopérative comme acteur économique local.
+					</p>
+					<div class="flex justify-center">
+						<a href="https://sn.linkedin.com/company/agrijeunes?utm_source=chatgpt.com"
+            target="_blank" rel="noopener noreferrer"
+            class="btn-primary px-8 py-3 text-white font-semibold rounded-lg text-base">
+            Voir plus
+        </a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Projet 3 -->
+			<div class="project-card rounded-2xl overflow-hidden animate-fade-in-up animate-stagger-3">
+				<div class="project-media-container">
+					<!-- Image principale -->
+					<div class="project-image bg-gradient-to-br from-blue-400 to-blue-600 h-48 flex items-center justify-center relative overflow-hidden">
+						<img src="src/images/adepme1.jpeg" alt="Conseil ADEPME" class="w-full h-full object-cover">
+						<div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+							<span class="text-white font-semibold text-lg">Voir la galerie</span>
+						</div>
+						<!-- Flèches de navigation -->
+						<button class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition-all duration-300 opacity-0 hover:opacity-100 nav-arrow nav-prev" data-project="adepme">
+							<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+							</svg>
+						</button>
+						<button class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition-all duration-300 opacity-0 hover:opacity-100 nav-arrow nav-next" data-project="adepme">
+							<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+							</svg>
+						</button>
+					</div>
+					
+					<!-- Miniatures galerie -->
+					<div class="p-4 bg-gray-50">
+						<div class="grid grid-cols-4 gap-2">
+							<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition">
+								<img src="src/images/adepme2.jpeg" alt="ADEPME 1" class="w-full h-full object-cover">
+							</div>
+							<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition">
+								<img src="src/images/adepme3.jpeg" alt="ADEPME 2" class="w-full h-full object-cover">
+							</div>
+							<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition">
+								<img src="src/images/adepme4.jpeg" alt="ADEPME 3" class="w-full h-full object-cover">
+							</div>
+							<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition">
+								<img src="src/images/adepme5.jpeg" alt="ADEPME 4" class="w-full h-full object-cover">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="p-6">
+					<h3 class="text-xl font-bold text-gray-900 mb-2">Conseil d'Entreprise & Gestion de Projet – ADEPME</h3>
+					<p class="text-gray-600 mb-4 text-sm leading-relaxed">
+						Le cabinet AGIL/D, formalisé par l'ADEPME comme Conseil d'Entreprise et de Gestion de Projet, accompagne les PME dans leur structuration et leur développement. Ses interventions portent sur le conseil stratégique en organisation, planification et suivi de projets, ainsi que sur le renforcement des capacités des entrepreneurs pour améliorer leur performance et assurer la durabilité de leurs initiatives. Cette reconnaissance officielle confirme AGIL/D comme partenaire de référence auprès des entreprises, contribuant à la compétitivité des structures accompagnées et au développement économique local.
+
+					</p>
+					<div class="flex justify-center">
+						<a href="https://adepme.sn/accompagnement/?utm_source=chatgpt.com"
+            target="_blank" rel="noopener noreferrer"
+            class="btn-primary px-8 py-3 text-white font-semibold rounded-lg text-base">
+            Voir plus
+        </a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Deuxième ligne : 2 projets centrés -->
+		<div class="flex justify-center">
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full">
+				<!-- Projet 4 -->
+				<div class="project-card rounded-2xl overflow-hidden animate-fade-in-up animate-stagger-4">
 					<div class="project-media-container">
-						<!-- Image principale (vidéo principale) -->
-						<div class="project-image bg-gradient-to-br from-blue-400 to-blue-600 h-48 flex items-center justify-center relative overflow-hidden">
-							<video class="w-full h-full object-cover" muted autoplay loop>
-								<source src="src/images/agrijeune1.mp4" type="video/mp4">
-							</video>
+						<!-- Image principale -->
+						<div class="project-image bg-gradient-to-br from-purple-400 to-purple-600 h-48 flex items-center justify-center relative overflow-hidden">
+							<img src="src/images/medes/medes1.jpeg" alt="Projet MEDES" class="w-full h-full object-cover">
 							<div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
 								<span class="text-white font-semibold text-lg">Voir la galerie</span>
 							</div>
+							<!-- Flèches de navigation -->
+							<button class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition-all duration-300 opacity-0 hover:opacity-100 nav-arrow nav-prev" data-project="medes">
+								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+								</svg>
+							</button>
+							<button class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition-all duration-300 opacity-0 hover:opacity-100 nav-arrow nav-next" data-project="medes">
+								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+								</svg>
+							</button>
 						</div>
 						
 						<!-- Miniatures galerie -->
 						<div class="p-4 bg-gray-50">
 							<div class="grid grid-cols-4 gap-2">
+								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition">
+									<img src="src/images/medes/medes2.jpeg" alt="MEDES 2" class="w-full h-full object-cover">
+								</div>
 								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition relative">
 									<video class="w-full h-full object-cover" muted>
-										<source src="src/images/agrijeune2.mp4" type="video/mp4">
+										<source src="src/images/medes/medes4.mp4" type="video/mp4">
 									</video>
 									<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-										<svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+										<svg class="w-6 h-6 text-white animate-pulse" fill="currentColor" viewBox="0 0 20 20">
 											<path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
 											<path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
 										</svg>
 									</div>
 								</div>
-								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition relative">
-									<video class="w-full h-full object-cover" muted>
-										<source src="src/images/agrijeune3.mp4" type="video/mp4">
-									</video>
-									<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-										<svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-											<path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
-											<path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
-										</svg>
-									</div>
+								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition">
+									<img src="src/images/medes/medes3.jpeg" alt="MEDES 3" class="w-full h-full object-cover">
 								</div>
-								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition relative">
-									<video class="w-full h-full object-cover" muted>
-										<source src="src/images/agrijeune4.mp4" type="video/mp4">
-									</video>
-									<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-										<svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-											<path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
-											<path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
-										</svg>
-									</div>
-								</div>
-								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition relative">
-									<video class="w-full h-full object-cover" muted>
-										<source src="src/images/agrijeune1.mp4" type="video/mp4">
-									</video>
-									<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-										<svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-											<path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
-											<path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
-										</svg>
-									</div>
+								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition">
+									<img src="src/images/medes/medes1.jpeg" alt="MEDES 1" class="w-full h-full object-cover">
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="p-6">
-						<h3 class="text-xl font-bold text-gray-900 mb-2">Formation en Entreprenariat & Gestion Financière – Axe Nord</h3>
 						<p class="text-gray-600 mb-4 text-sm leading-relaxed">
-							Le cabinet AGIL/D a accompagné la coopérative AGRIJEUNE de l’axe Nord à travers des formations en entreprenariat et gestion financière, combinant ateliers pratiques sur la planification budgétaire et la tenue de comptes, sensibilisation à la gouvernance coopérative et à la transparence, ainsi que renforcement de l’esprit entrepreneurial et structuration des projets. Cette intervention a permis d’accroître les compétences des jeunes membres, d’améliorer leur maîtrise des outils de gestion financière et de consolider la coopérative comme acteur économique local.
+							Le projet MEDES mené par AGIL/D vise à renforcer le développement économique et social des communautés locales à travers des initiatives intégrées. Nos interventions combinent l'appui aux entreprises locales, la formation professionnelle des jeunes, et la mise en place d'infrastructures communautaires durables. Ce programme holistique favorise la création d'emplois, l'amélioration des conditions de vie et l'autonomisation des populations vulnérables, contribuant ainsi à un développement inclusif et équilibré des territoires d'intervention.
 						</p>
 						<div class="flex justify-center">
-							<a href="https://sn.linkedin.com/company/agrijeunes?utm_source=chatgpt.com"
-           target="_blank" rel="noopener noreferrer"
-           class="btn-primary px-8 py-3 text-white font-semibold rounded-lg text-base">
+							<a href="https://meds-senegal.com/atelier-training-du-meds-les-jeunes-formes-aux-techniques-de-recherches-demploi/"
+            target="_blank" rel="noopener noreferrer"
+            class="btn-primary px-8 py-3 text-white font-semibold rounded-lg text-base">
             Voir plus
         </a>
 						</div>
 					</div>
 				</div>
 
-				<!-- Projet 3 -->
-				<div class="project-card rounded-2xl overflow-hidden animate-fade-in-up animate-stagger-3">
+				<!-- Projet 5 -->
+				<div class="project-card rounded-2xl overflow-hidden animate-fade-in-up animate-stagger-5">
 					<div class="project-media-container">
 						<!-- Image principale -->
-						<div class="project-image bg-gradient-to-br from-blue-400 to-blue-600 h-48 flex items-center justify-center relative overflow-hidden">
-							<img src="src/images/adepme1.jpeg" alt="Conseil ADEPME" class="w-full h-full object-cover">
+						<div class="project-image bg-gradient-to-br from-green-400 to-green-600 h-48 flex items-center justify-center relative overflow-hidden">
+							<img src="src/images/yessal/yessal2.jpeg" alt="Projet YESSAL" class="w-full h-full object-cover">
 							<div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
 								<span class="text-white font-semibold text-lg">Voir la galerie</span>
 							</div>
+							<!-- Flèches de navigation -->
+							<button class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition-all duration-300 opacity-0 hover:opacity-100 nav-arrow nav-prev" data-project="yessal">
+								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+								</svg>
+							</button>
+							<button class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition-all duration-300 opacity-0 hover:opacity-100 nav-arrow nav-next" data-project="yessal">
+								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+								</svg>
+							</button>
 						</div>
 						
 						<!-- Miniatures galerie -->
 						<div class="p-4 bg-gray-50">
 							<div class="grid grid-cols-4 gap-2">
 								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition">
-									<img src="src/images/adepme2.jpeg" alt="ADEPME 1" class="w-full h-full object-cover">
+									<img src="src/images/yessal/yessal1.jpeg" alt="YESSAL 1" class="w-full h-full object-cover">
 								</div>
 								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition">
-									<img src="src/images/adepme3.jpeg" alt="ADEPME 2" class="w-full h-full object-cover">
+									<img src="src/images/yessal/yessal2.jpeg" alt="YESSAL 2" class="w-full h-full object-cover">
 								</div>
-								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition">
-									<img src="src/images/adepme4.jpeg" alt="ADEPME 3" class="w-full h-full object-cover">
+								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition relative">
+									<video class="w-full h-full object-cover" muted autoplay loop>
+										<source src="src/images/yessal/yessal 3.mp4" type="video/mp4">
+									</video>
+									<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+										<svg class="w-6 h-6 text-white animate-pulse" fill="currentColor" viewBox="0 0 20 20">
+											<path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+											<path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+										</svg>
+									</div>
 								</div>
-								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition">
-									<img src="src/images/adepme5.jpeg" alt="ADEPME 4" class="w-full h-full object-cover">
+								<div class="aspect-square overflow-hidden rounded cursor-pointer hover:opacity-80 transition relative">
+									<video class="w-full h-full object-cover" muted>
+										<source src="src/images/yessal/yessal4.mp4" type="video/mp4">
+									</video>
+									<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+										<svg class="w-6 h-6 text-white animate-pulse" fill="currentColor" viewBox="0 0 20 20">
+											<path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+											<path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+										</svg>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="p-6">
-						<h3 class="text-xl font-bold text-gray-900 mb-2">Conseil d’Entreprise & Gestion de Projet – ADEPME</h3>
 						<p class="text-gray-600 mb-4 text-sm leading-relaxed">
-							Le cabinet AGIL/D, formalisé par l’ADEPME comme Conseil d’Entreprise et de Gestion de Projet, accompagne les PME dans leur structuration et leur développement. Ses interventions portent sur le conseil stratégique en organisation, planification et suivi de projets, ainsi que sur le renforcement des capacités des entrepreneurs pour améliorer leur performance et assurer la durabilité de leurs initiatives. Cette reconnaissance officielle confirme AGIL/D comme partenaire de référence auprès des entreprises, contribuant à la compétitivité des structures accompagnées et au développement économique local.
-
+							Le programme YESSAL porté par AGIL/D s'adresse aux jeunes entrepreneurs et aux demandeurs d'emploi en quête d'opportunités. Notre approche combine la formation aux compétences entrepreneuriales, l'accompagnement personnalisé dans la création d'entreprises, et la mise en relation avec le monde professionnel. Ce programme structuré sur plusieurs mois permet aux participants de développer leurs projets, d'acquérir des compétences pratiques et de s'intégrer durablement dans le marché du travail ou de créer leurs propres activités économiques.
 						</p>
 						<div class="flex justify-center">
-							<a href="https://adepme.sn/accompagnement/?utm_source=chatgpt.com"
-           target="_blank" rel="noopener noreferrer"
-           class="btn-primary px-8 py-3 text-white font-semibold rounded-lg text-base">
+							<a href="https://lvdamalika.sn/index.php/2025/02/11/yessal-malika/"
+            target="_blank" rel="noopener noreferrer"
+            class="btn-primary px-8 py-3 text-white font-semibold rounded-lg text-base">
             Voir plus
         </a>
 						</div>
@@ -985,41 +1204,65 @@
 				</div>
 			</div>
 		</div>
-	</section>
-
+	</div>
+</section>
 	<!-- Clients / Partenaires Section -->
 	<section id="testimonials" class="py-28 bg-gradient-to-b from-gray-50 to-white">
-		<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-			<div class="text-center mb-12">
-				<h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4 animate-fade-in-up">Clients / Partenaires</h2>
-				<p class="text-lg text-gray-600 mb-6 animate-fade-in-up animate-stagger-1 max-w-2xl mx-auto">Une sélection d'organisations, entreprises, ONG et GIE avec lesquelles nous avons collaboré — sélectionnez un logo pour en savoir plus.</p>
-				<div class="separator mx-auto animate-fade-in-up animate-stagger-2"></div>
-			</div>
+	<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="text-center mb-12">
+			<h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4 animate-fade-in-up">Clients / Partenaires</h2>
+			<p class="text-lg text-gray-600 mb-6 animate-fade-in-up animate-stagger-1 max-w-2xl mx-auto">Une sélection d'organisations, entreprises, ONG et GIE avec lesquelles nous avons collaboré — sélectionnez un logo pour en savoir plus.</p>
+			<div class="separator mx-auto animate-fade-in-up animate-stagger-2"></div>
+		</div>
 
-			<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 items-stretch">
-				<!-- Partner 1 -->
-				<a href="https://adepme.sn/accompagnement/?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="block p-6 bg-white/70 rounded-lg shadow-sm hover:shadow-md transition transform hover:-translate-y-1 text-center">
-					<img src="src/logos/adepme.png" class="mx-auto h-24 object-contain mb-4">
-					<h4 class="font-bold text-gray-900">Adepme</h4>
-					<p class="text-sm text-gray-600 mt-2">L’ADEPME est l’Agence de Développement et d’Encadrement des Petites et Moyennes Entreprises du Sénégal, chargée de soutenir, accompagner et formaliser les PME pour renforcer leur compétitivité et leur contribution à l’économie nationale.</p>
+		<!-- Première ligne : 3 partenaires -->
+		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 items-stretch mb-8">
+			<!-- Partner 1 -->
+			<a href="https://adepme.sn/accompagnement/?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="block p-6 bg-white/70 rounded-lg shadow-sm hover:shadow-md transition transform hover:-translate-y-1 text-center">
+				<img src="src/logos/adepme.png" class="mx-auto h-24 object-contain mb-4">
+				<h4 class="font-bold text-gray-900">Adepme</h4>
+				<p class="text-sm text-gray-600 mt-2">L'ADEPME est l'Agence de Développement et d'Encadrement des Petites et Moyennes Entreprises du Sénégal, chargée de soutenir, accompagner et formaliser les PME pour renforcer leur compétitivité et leur contribution à l'économie nationale.</p>
+			</a>
+
+			<!-- Partner 2 -->
+			<a href="https://sn.linkedin.com/company/agrijeunes?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="block p-6 bg-white/70 rounded-lg shadow-sm hover:shadow-md transition transform hover:-translate-y-1 text-center">
+				<img src="src/logos/agrijeune.png" class="mx-auto h-24 object-contain mb-4">
+				<h4 class="font-bold text-gray-900">Agrijeune</h4>
+				<p class="text-sm text-gray-600 mt-2">AGRIJEUNE est une société coopérative de jeunes de l'axe Nord, engagée dans le développement économique local à travers l'entreprenariat, la gestion financière et la structuration de projets collectifs.</p>
+			</a>
+
+			<!-- Partner 3 -->
+			<a href="https://www.cabinetede.com/index.php/en/our-programs/technical-assistance-onas?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="block p-6 bg-white/70 rounded-lg shadow-sm hover:shadow-md transition transform hover:-translate-y-1 text-center">
+				<img src="src/logos/ede.webp" class="mx-auto h-24 object-contain mb-4">
+				<h4 class="font-bold text-gray-900">Cabinet EDE</h4>
+				<p class="text-sm text-gray-600 mt-2">Le Cabinet EDE Dakar est une société d'ingénierie-conseil panafricaine spécialisée dans l'eau, l'assainissement et l'environnement, qui accompagne les projets par des solutions techniques et sociales durables.</p>
+			</a>
+		</div>
+
+		<!-- Deuxième ligne : 2 partenaires centrés -->
+		<div class="flex justify-center">
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl w-full">
+				<!-- Partner 4 -->
+				<a href="https://meds-senegal.com/atelier-training-du-meds-les-jeunes-formes-aux-techniques-de-recherches-demploi/" target="_blank" rel="noopener noreferrer" class="block p-6 bg-white/70 rounded-lg shadow-sm hover:shadow-md transition transform hover:-translate-y-1 text-center">
+					<div class="flex items-center justify-center h-24 mb-4">
+						<img src="src/images/medes/logo.png" class="max-h-full max-w-full object-contain">
+					</div>
+					<h4 class="font-bold text-gray-900">MEDES</h4>
+					<p class="text-sm text-gray-600 mt-2">MEDES est un programme de développement économique et social qui vise à renforcer les communautés locales à travers des initiatives intégrées, la formation professionnelle et la mise en place d'infrastructures durables.</p>
 				</a>
 
-				<!-- Partner 2 -->
-				<a href="https://sn.linkedin.com/company/agrijeunes?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="block p-6 bg-white/70 rounded-lg shadow-sm hover:shadow-md transition transform hover:-translate-y-1 text-center">
-					<img src="src/logos/agrijeune.png" class="mx-auto h-24 object-contain mb-4">
-					<h4 class="font-bold text-gray-900">Agrijeune</h4>
-					<p class="text-sm text-gray-600 mt-2">AGRIJEUNE est une société coopérative de jeunes de l’axe Nord, engagée dans le développement économique local à travers l’entreprenariat, la gestion financière et la structuration de projets collectifs.</p>
-				</a>
-
-				<!-- Partner 3 -->
-				<a href="https://www.cabinetede.com/index.php/en/our-programs/technical-assistance-onas?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="block p-6 bg-white/70 rounded-lg shadow-sm hover:shadow-md transition transform hover:-translate-y-1 text-center">
-					<img src="src/logos/ede.webp" class="mx-auto h-24 object-contain mb-4">
-					<h4 class="font-bold text-gray-900">Cabinet EDE</h4>
-					<p class="text-sm text-gray-600 mt-2">Le Cabinet EDE Dakar est une société d’ingénierie-conseil panafricaine spécialisée dans l’eau, l’assainissement et l’environnement, qui accompagne les projets par des solutions techniques et sociales durables.</p>
+				<!-- Partner 5 -->
+				<a href="https://lvdamalika.sn/index.php/2025/02/11/yessal-malika/" target="_blank" rel="noopener noreferrer" class="block p-6 bg-white/70 rounded-lg shadow-sm hover:shadow-md transition transform hover:-translate-y-1 text-center">
+					<div class="flex items-center justify-center h-24 mb-4">
+						<img src="src/images/yessal/logo.png" class="max-h-full max-w-full object-contain">
+					</div>
+					<h4 class="font-bold text-gray-900">LVDA yessal-malika</h4>
+					<p class="text-sm text-gray-600 mt-2">YESSAL est un programme d'entrepreneuriat et d'insertion professionnelle qui accompagne les jeunes entrepreneurs et demandeurs d'emploi dans la création d'entreprises et l'intégration au marché du travail.</p>
 				</a>
 			</div>
 		</div>
-	</section>
+	</div>
+</section>
 
 	<!-- Modal Galerie Média -->
 	<div id="mediaModal" class="media-modal">
@@ -1366,6 +1609,124 @@
 			displayCurrentMedia();
 		}
 
+		// Fonctions pour la navigation des galeries
+		function changeMainImage(thumbnail) {
+			const mediaContainer = thumbnail.closest('.project-media-container');
+			const mainImageContainer = mediaContainer.querySelector('.project-image');
+			const img = thumbnail.querySelector('img');
+			const video = thumbnail.querySelector('video');
+			
+			if (img) {
+				// Si c'est une image, la mettre comme image principale
+				mainImageContainer.innerHTML = `
+					<img src="${img.src}" alt="${img.alt}" class="w-full h-full object-cover">
+					<div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+						<span class="text-white font-semibold text-lg">Voir la galerie</span>
+					</div>
+				`;
+			} else if (video) {
+				// Si c'est une vidéo, la mettre comme image principale
+				const videoSrc = video.querySelector('source').src;
+				mainImageContainer.innerHTML = `
+					<video class="w-full h-full object-cover" muted autoplay loop>
+						<source src="${videoSrc}" type="video/mp4">
+					</video>
+					<div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+						<span class="text-white font-semibold text-lg">Voir la galerie</span>
+					</div>
+				`;
+			}
+			
+			// Ajouter l'écouteur d'événement pour ouvrir le modal au clic sur la nouvelle image principale
+			const newMainImage = mainImageContainer.querySelector('img, video');
+			if (newMainImage) {
+				mainImageContainer.addEventListener('click', function() {
+					const thumbnails = mediaContainer.querySelectorAll('.thumbnail');
+					const mediaArray = Array.from(thumbnails).map(thumb => {
+						const img = thumb.querySelector('img');
+						const video = thumb.querySelector('video');
+						if (img) return { type: 'image', src: img.src, alt: img.alt };
+						if (video) return { type: 'video', src: video.querySelector('source').src };
+						return null;
+					}).filter(Boolean);
+					
+					// Trouver l'index de l'image actuelle
+					const currentSrc = newMainImage.src || newMainImage.querySelector('source')?.src;
+					currentMediaIndex = mediaArray.findIndex(media => media.src === currentSrc);
+					currentMediaArray = mediaArray;
+					openMediaModal();
+				});
+			}
+		}
+
+		// Initialisation des galeries
+		function initializeGalleries() {
+			// Ajouter les écouteurs d'événements aux miniatures
+			document.querySelectorAll('.thumbnail').forEach((thumbnail, index) => {
+				thumbnail.addEventListener('click', function() {
+					const mediaContainer = this.closest('.project-media-container');
+					const thumbnails = mediaContainer.querySelectorAll('.thumbnail');
+					const mediaArray = Array.from(thumbnails).map(thumb => {
+						const img = thumb.querySelector('img');
+						const video = thumb.querySelector('video');
+						if (img) return { type: 'image', src: img.src, alt: img.alt };
+						if (video) return { type: 'video', src: video.querySelector('source').src };
+						return null;
+					}).filter(Boolean);
+					
+					currentMediaIndex = thumbnails.indexOf(this);
+					currentMediaArray = mediaArray;
+					
+					// Changer l'image principale
+					changeMainImage(this);
+					
+					// Ouvrir le modal en double-clic
+					if (event.detail === 2) {
+						openMediaModal();
+					}
+				});
+			});
+
+			// Ajouter les écouteurs pour les flèches de navigation
+			document.querySelectorAll('.nav-arrow').forEach(arrow => {
+				arrow.addEventListener('click', function(e) {
+					e.stopPropagation();
+					const mediaContainer = this.closest('.project-media-container');
+					const thumbnails = mediaContainer.querySelectorAll('.thumbnail');
+					const mediaArray = Array.from(thumbnails).map(thumb => {
+						const img = thumb.querySelector('img');
+						const video = thumb.querySelector('video');
+						if (img) return { type: 'image', src: img.src, alt: img.alt };
+						if (video) return { type: 'video', src: video.querySelector('source').src };
+						return null;
+					}).filter(Boolean);
+					
+					// Trouver l'index de l'image actuelle
+					const currentMainImg = mediaContainer.querySelector('.project-image img');
+					const currentMainVideo = mediaContainer.querySelector('.project-image video');
+					let currentSrc = currentMainImg ? currentMainImg.src : (currentMainVideo ? currentMainVideo.querySelector('source').src : null);
+					
+					let currentIndex = 0;
+					if (currentSrc) {
+						currentIndex = mediaArray.findIndex(media => media.src === currentSrc);
+						if (currentIndex === -1) currentIndex = 0;
+					}
+					
+					// Calculer le nouvel index
+					const direction = this.classList.contains('nav-prev') ? -1 : 1;
+					let newIndex = currentIndex + direction;
+					
+					// Navigation circulaire
+					if (newIndex < 0) newIndex = mediaArray.length - 1;
+					if (newIndex >= mediaArray.length) newIndex = 0;
+					
+					// Changer l'image principale
+					const targetThumbnail = thumbnails[newIndex];
+					changeMainImage(targetThumbnail);
+				});
+			});
+		}
+
 		// Ajouter les classes CSS aux miniatures existantes
 		document.addEventListener('DOMContentLoaded', function() {
 			document.querySelectorAll('.project-media-container .aspect-square').forEach(thumb => {
@@ -1379,6 +1740,9 @@
 					overlay.querySelector('svg').classList.add('video-icon');
 				}
 			});
+
+			// Initialiser les galeries
+			initializeGalleries();
 		});
 	</script>
 
